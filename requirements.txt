@@ -1,0 +1,12 @@
+
+langchain-google-genai
+langchain-community==0.2.12
+langchain==0.2.14
+pymilvus
+pypdf
+python-dotenv
+tiktoken
+playwright
+fastapi
+uvicorn
+python-multipart
