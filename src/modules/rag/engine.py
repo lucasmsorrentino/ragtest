@@ -2,7 +2,7 @@
 from langchain_community.document_loaders import PyPDFLoader
 from langchain_text_splitters import RecursiveCharacterTextSplitter
 from langchain_community.vectorstores import Milvus
-from langchain_google_genai import GoogleGenerativeAIEmbeddings, ChatGoogleGenerativeAI
+from src.core.factory import ModelFactory
 from langchain.chains.retrieval import create_retrieval_chain
 from langchain.chains.combine_documents import create_stuff_documents_chain
 from langchain_core.prompts import ChatPromptTemplate
@@ -13,8 +13,8 @@ class RAGEngine:
         """
         Initialize vector store connection and LLM.
         """
-        self.embeddings = GoogleGenerativeAIEmbeddings(model="models/embedding-001", google_api_key=settings.GOOGLE_API_KEY)
-        self.llm = ChatGoogleGenerativeAI(model="gemini-1.5-pro", temperature=0, google_api_key=settings.GOOGLE_API_KEY)
+        self.embeddings = ModelFactory.get_embeddings()
+        self.llm = ModelFactory.get_llm()
 
     def load_and_split_pdf(self, file_path):
         loader = PyPDFLoader(file_path)
@@ -24,7 +24,7 @@ class RAGEngine:
         return splits
 
     def get_vector_store(self, splits):
-        # Milvus Lite using the path from settings
+        # Milvus Vector Store
         vector_store = Milvus.from_documents(
             splits,
             embedding=self.embeddings,
