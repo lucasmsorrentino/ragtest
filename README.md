@@ -39,15 +39,6 @@ A modular, scalable AI Agent built with **FastAPI** and **LangChain**. Currently
     pip install -r requirements.txt
     ```
 
-## ⚙️ Configuration
-
-1. Create a `.env` file in the root directory.
-2. Add your Google Gemini API Key:
-
-    ```env
-    GOOGLE_API_KEY=your_api_key_here
-    ```
-
 ## 🏃‍♂️ Usage
 
 1. **Start the API Server**
